@@ -167,6 +167,16 @@
             android:adjustViewBounds="true"
 
             />
+
+        <ImageButton
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:id="@+id/id_save"
+            android:src="@drawable/save"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+
+            />
     </LinearLayout>
 
 

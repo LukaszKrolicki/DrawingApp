@@ -81,7 +81,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun shareImage(result:String){
-        MediaScannerConnection.scanFile(this, arrayOf(result),null)
+        MediaScannerConnection.scanFile(this, arrayOf(result),null){
+            path,uri->
+            val shareIntent=Intent()
+            shareIntent.action=Intent.ACTION_SEND // IT ALLOWS US TO SEND ITEMS
+            shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+            shareIntent.type = "image/png"//what type of
+            startActivity(Intent.createChooser(shareIntent,"Share"))
+        }
+
     }
 
     private  fun cancelProgressDialog(){
@@ -246,6 +254,7 @@ class MainActivity : AppCompatActivity() {
                         cancelProgressDialog()
                         if(result.isNotEmpty()){
                             Toast.makeText(this@MainActivity,"File saved: $result", Toast.LENGTH_LONG).show()
+                            shareImage(result)
                         }
                         else{
                             Toast.makeText(this@MainActivity,"Somethig went wrong", Toast.LENGTH_LONG).show()
